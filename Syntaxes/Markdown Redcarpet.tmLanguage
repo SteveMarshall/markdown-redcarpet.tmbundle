@@ -620,7 +620,14 @@
 					<key>end</key>
 					<string>(^|\G)[ ]{,3}([-*_])([ ]{,2}\2){2,}[ \t]*$\n?</string>
 					<key>name</key>
-					<string>meta.frontmatter.markdown</string>
+					<string>source.yaml.embedded.markdown</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>source.yaml</string>
+						</dict>
+					</array>
 				</dict>
 			</dict>
 		</dict>
