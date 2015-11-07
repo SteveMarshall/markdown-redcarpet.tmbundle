@@ -11,6 +11,8 @@ if ARGV.include?('--help')
 end
 
 require 'rubygems'
+require 'yaml'
+require 'English'
 
 begin
   require 'redcarpet'
@@ -62,6 +64,18 @@ def markdown(text)
   Redcarpet::Markdown.new(renderer, options).render(text)
 end
 
+def strip_frontmatter(text)
+  if text =~ /\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)/m
+    yaml = YAML.load($1)
+    if yaml.include?("title")
+      "# #{yaml["title"]}\n#{$POSTMATCH}"
+    else
+      $POSTMATCH
+    end
+  else
+    text
+  end
+end
 
-puts [css, markdown(ARGF.read)].join
+puts [css, markdown(strip_frontmatter(ARGF.read))].join
 
