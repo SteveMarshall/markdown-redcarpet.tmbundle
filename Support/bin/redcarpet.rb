@@ -50,7 +50,7 @@ class HTMLwithPygments < Redcarpet::Render::HTML
 end
 
 def markdown(text)
-  renderer = HTMLwithPygments.new(:hard_wrap => true, :filter_html => true)
+  renderer = HTMLwithPygments.new(with_toc_data: true)
   options = {
     :autolink            => true,
     :space_after_headers => true,
@@ -58,9 +58,9 @@ def markdown(text)
     :tables              => true,
     :strikethrough       => true,
     :smart               => true,
-    :hard_wrap           => true,
     :safelink            => true,
-    :no_intraemphasis    => true,
+    :no_intra_emphasis   => true,
+    :superscript         => true,
   }
   Redcarpet::Markdown.new(renderer, options).render(text)
 end
